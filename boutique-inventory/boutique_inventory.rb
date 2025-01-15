@@ -4,7 +4,7 @@ class BoutiqueInventory
   end
 
   def item_names
-    return items.map { |item| item[:name]}
+    return items.map { |item| item[:name]}.sort
   end
 
   def cheap
@@ -12,7 +12,7 @@ class BoutiqueInventory
   end
 
   def out_of_stock
-    return items.select { |item| item[:quantity_by_size].length == 0 }
+    return items.select { |item| item[:quantity_by_size].empty? }
   end
 
   def stock_for_item(name)
@@ -20,7 +20,7 @@ class BoutiqueInventory
   end
 
   def total_stock
-    return items.map { |item| item[:quantity_by_size].values.sum }.sum
+    return items.map { |item| item[:quantity_by_size].values.sum }
   end
 
   private
