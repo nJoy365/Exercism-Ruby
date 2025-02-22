@@ -7,29 +7,36 @@ module TwelveDays
               11 => "eleven", 12 => "twelve" }
   GIFTS = [
                 "a Partridge in a Pear Tree",
-                "Turtle Doves",
-                "French Hens,",
-                "Calling Birds,",
-                "Gold Rings,",
-                "Geese-a-Laying,",
-                "Swans-a-Swimming,",
-                "Maids-a-Milking,",
-                "Ladies Dancing,",
-                "Lords-a-Leaping,",
-                "Pipers Piping,",
-                "Drummers Drumming,"
+                "two Turtle Doves",
+                "three French Hens",
+                "four Calling Birds",
+                "five Gold Rings",
+                "six Geese-a-Laying",
+                "seven Swans-a-Swimming",
+                "eight Maids-a-Milking",
+                "nine Ladies Dancing",
+                "ten Lords-a-Leaping",
+                "eleven Pipers Piping",
+                "twelve Drummers Drumming"
               ]
   def self.song
-    verses(1, 24)
+    verses(1, 12)
   end
 
   def self.verses(start, finish)
-    (start..finish).map { |i| verse(i) }.join("\n")
+    (start..finish).map { |i| verse(i) }.join("\n\n") + "\n"
   end
 
   def self.verse(day)
-    gifts = GIFTS.first(day).join(",")
-    "On the #{DAYS[day]} day of Christmas my true love gave to me: #{NUMBERS[day]} #{gifts}"
+    "On the #{DAYS[day]} day of Christmas my true love gave to me: #{gifts(day)}."
+  end
+
+  def self.gifts(day)
+    return GIFTS[day-1] if day == 1
+
+    (1..day).map do |n|
+      n == 1 ? "and #{GIFTS[n-1]}" : GIFTS[n-1]
+    end.reverse.join(', ')
   end
 
   
